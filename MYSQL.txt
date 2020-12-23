@@ -1,0 +1,165 @@
+Microsoft Windows [Version 10.0.18362.356]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\WINDOWS\system32>CD C:\XAMPP\MYSQL\BIN
+
+C:\xampp\mysql\bin>MYSQL.EXE -U ROOT -P
+MYSQL.EXE: option '-P' requires an argument
+
+C:\xampp\mysql\bin>mysql.exe -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 48
+Server version: 10.4.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| sudip_test         |
++--------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [(none)]> CREATE DATABASE DAIRY_MANAGEMENT
+    -> ;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| dairy_management   |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| sudip_test         |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> USE DAIRY_MANAGEMENT;
+Database changed
+MariaDB [DAIRY_MANAGEMENT]> SHOW TABLES;
+
++----------------------------+
+| Tables_in_dairy_management |
++----------------------------+
+| admin                      |
++----------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [DAIRY_MANAGEMENT]> CREATE TABLE ADMIN( ID VARCHAR(10) PRIMARY KEY NOT NULL,PASSWORD VARCHAR(10) NOT NULL);
+Query OK, 0 rows affected (0.343 sec)
+MariaDB [DAIRY_MANAGEMENT]> DESCRIBE ADMIN;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ID       | varchar(10) | NO   | PRI | NULL    |       |
+| PASSWORD | varchar(10) | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+2 rows in set (0.009 sec)
+
+
+MariaDB [DAIRY_MANAGEMENT]> INSERT INTO ADMIN VALUES('AD01','7685957307');
+Query OK, 1 row affected (0.065 sec)
+
+MariaDB [DAIRY_MANAGEMENT]> SELECT * FROM ADMIN;
++------+------------+
+| ID   | PASSWORD   |
++------+------------+
+| AD01 | 7685957307 |
++------+------------+
+1 row in set (0.000 sec)
+
+
+
+MariaDB [DAIRY_MANAGEMENT]>  CREATE TABLE SELLER(S_CODE VARCHAR(10) NOT NULL PRIMARY KEY,
+    -> USER_ID VARCHAR(10),NAME VARCHAR(20),ADDRESS VARCHAR(100),ANI_CATTLE VARCHAR(20),R_DATE DATE,
+    -> SELL_MILK VARCHAR(10),FOREIGN KEY(USER_ID) REFERENCES ADMIN(ID));
+Query OK, 0 rows affected (0.472 sec)
+
+MariaDB [DAIRY_MANAGEMENT]> SHOW TABLES;
++----------------------------+
+| Tables_in_dairy_management |
++----------------------------+
+| admin                      |
+| feedback                   |
+| seller                     |
++----------------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [DAIRY_MANAGEMENT]> DESCRIBE SELLER;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| S_CODE     | varchar(10)  | NO   | PRI | NULL    |       |
+| USER_ID    | varchar(10)  | YES  | MUL | NULL    |       |
+| NAME       | varchar(20)  | YES  |     | NULL    |       |
+| ADDRESS    | varchar(100) | YES  |     | NULL    |       |
+| ANI_CATTLE | varchar(20)  | YES  |     | NULL    |       |
+| R_DATE     | date         | YES  |     | NULL    |       |
+| SELL_MILK  | varchar(10)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+7 rows in set (0.009 sec)
+
+MariaDB [dairy_management]> CREATE TABLE STAFF(STAFF_NO VARCHAR(10) NOT NULL PRIMARY KEY,
+    -> USER_ID VARCHAR(10),NAME VARCHAR(20),ADDRESS VARCHAR(100),GENDER VARCHAR(6),
+    -> DESIGNATION VARCHAR(20), SALLERY INT(10), PHONE_NO INT(10),
+    -> FOREIGN KEY(USER_ID) REFERENCES ADMIN(ID));
+Query OK, 0 rows affected (0.278 sec)
+
+MariaDB [dairy_management]> DESCRIBE STAFF;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| STAFF_NO    | varchar(10)  | NO   | PRI | NULL    |       |
+| USER_ID     | varchar(10)  | YES  | MUL | NULL    |       |
+| NAME        | varchar(20)  | YES  |     | NULL    |       |
+| ADDRESS     | varchar(100) | YES  |     | NULL    |       |
+| GENDER      | varchar(6)   | YES  |     | NULL    |       |
+| DESIGNATION | varchar(20)  | YES  |     | NULL    |       |
+| SALLERY     | int(10)      | YES  |     | NULL    |       |
+| PHONE_NO    | int(10)      | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+8 rows in set (0.011 sec)
+
+MariaDB [dairy_management]> CREATE TABLE MILK(FAT FLOAT(10,2) PRIMARY KEY,BUFFALO FLOAT(10,2),COW FLOAT(10,2),UDATE DATE);
+Query OK, 0 rows affected (0.242 sec)
+
+MariaDB [dairy_management]> DESCRIBE MILK;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| FAT     | float(10,2) | NO   | PRI | NULL    |       |
+| BUFFALO | float(10,2) | YES  |     | NULL    |       |
+| COW     | float(10,2) | YES  |     | NULL    |       |
+| UDATE   | date        | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.004 sec)
+
+
+MariaDB [dairy_management]> CREATE TABLE BILL(BID INT NOT NULL AUTO_INCREMENT,
+    -> S_CODE VARCHAR(10),FAT FLOAT(10,2),QUANTITY FLOAT(10,3),BDATE DATE,
+    -> AMMOUNT FLOAT(10,2),PRIMARY KEY(BID),FOREIGN KEY(S_CODE) REFERENCES SELLER(S_CODE));
+Query OK, 0 rows affected (0.169 sec)
+
+MariaDB [dairy_management]> describe bill;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| BID      | int(11)     | NO   | PRI | NULL    | auto_increment |
+| S_CODE   | varchar(10) | YES  | MUL | NULL    |                |
+| FAT      | float(10,2) | YES  |     | NULL    |                |
+| QUANTITY | float(10,3) | YES  |     | NULL    |                |
+| BDATE    | date        | YES  |     | NULL    |                |
+| AMMOUNT  | float(10,2) | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.009 sec)

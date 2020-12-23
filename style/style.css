@@ -1,0 +1,142 @@
+body{
+    background: linear-gradient(180deg, rgba(56, 55, 52,0),rgb(57, 166, 230));
+}
+.title{
+    position: fixed;
+    top: -4vw;
+    left: 0em;
+    width: 100%;
+    height: 10vw;
+    background-color: rgb(57, 166, 230);
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.5vw;
+    z-index: 10000;
+}
+.logo{
+    position: fixed;
+    top: 0;
+    height: 150px;
+    width: 200px;
+}
+.logo img{
+    width: 100%;
+    height: 100%;
+}
+.contact{
+    position: fixed;
+    height: 40px;
+    width: 40px;
+    right: 10px;
+    top: 100px;
+    z-index: 1000000;
+}
+.contact img{
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+}
+.middle{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1.3fr;
+    grid-column-gap: 2px;
+    grid-auto-rows: minmax(100px,auto);
+    height: auto;
+}
+.middle a{
+    text-decoration: none;
+}
+.menu{
+    width: auto;
+    margin: 150px auto;
+    height: 600px;
+    padding: 20px;
+    /*background-color: wheat;*/
+}
+.menu h1{
+    text-align: center;
+}
+.about{
+    font-size: large;
+    margin: 100px auto;
+    width: auto;
+    padding: 20px;
+    text-align: justify;
+    /*background-color: wheat;*/
+}
+.about h1{
+    text-align: center;
+}
+.middle .facilities{
+    /*margin-top: -100px;*/
+    display: grid;
+    grid-template-rows: auto(2fr);
+    grid-row-gap: 1em;
+    font-size: large;
+    margin: 100px auto;
+    /*width: auto;*/
+    padding: 20px;
+    text-align: justify;
+    
+}
+.facilities img{
+    /*margin-left: -100px;*/
+    /*margin-top: -100px;*/
+    border: 5px solid black;
+    height: 120px;
+    width: 150px;
+}
+.middle .storage{
+    /*margin-top: -100px;*/
+    /*display: grid;
+    grid-template-rows: auto;*/
+    grid-row-gap: 1em;
+    font-size: large;
+    margin: 100px auto;
+    /*width: auto;*/
+    padding: 20px;
+    text-align: justify;
+    
+}
+.storage img{
+    /*margin-left: -100px;*/
+    /*margin-top: -100px;*/
+    border: 5px solid black;
+    height: 300px;
+    width: 450px;
+}
+.gallery{
+    text-align: center;
+    margin: 150px auto;
+    /*background-color: wheat;*/
+}
+.gallery img{
+    margin-top: 10px;
+    position: relative;
+
+    height: 200px;
+    width: 250px;
+    filter: grayscale(100%);
+    border: 5px solid black;
+    z-index: 10;
+}
+.gallery img:hover{
+    position: sticky;
+    transition: 1s;
+    filter: grayscale(0);
+    transform: scale(1.2);
+    z-index: 100;
+}
+#span1{
+    font-weight: bold;
+}
+.tab{
+    display: inline-block;
+    margin-left: 40px;
+}
+.copyright{
+    height: 50px;
+    width: 100%;
+    background-color: rgb(65, 144, 212);
+    text-align: center;
+}
